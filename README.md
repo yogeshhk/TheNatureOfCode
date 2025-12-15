@@ -8,6 +8,13 @@ The original [Processing](http://processing.org) examples [can be found here](ht
 
 This port is made possible by [PyP5](https://github.com/p5py/p5).
 
+## Installation and Running
+Please see [SETUP_AND_RUN.md](SETUP_AND_RUN.md) for detailed instructions on how to set up the environment and run the examples.
+
+## Available Examples
+See [FILE_GUIDE.md](FILE_GUIDE.md) for a complete list of examples and what they demonstrate.
+
+
 ## Note
 - Pycharm shows syntax error for variables like 'width', 'height', etc. But they can be used as is. They are defined in 'bulletin' module(?) in Github_p5\p5\sketch\userspace.py
 
