@@ -1,38 +1,40 @@
 # The Nature of Code - Daniel Shiffman http://natureofcode.com
 # Example I-4: Custom Distribution
 # PyP5 port by: Yogesh Kulkarni
+# Updated by : Akanksha Suneri
+# Migrated to py5
 # Adopted from processing.py based implementation at:
 # https://github.com/nature-of-code/noc-examples-python/blob/master/introduction/MonteCarloDistribution
 # Reference Youtube Video: https://www.youtube.com/watch?v=rqecAdEGW6I&list=PLRqwX-V7Uu6aFlwukCmDf0-1-uSR7mklK&index=5
 
-from p5 import *
+import py5
 import random
 
 def setup():
-    size(200, 200)
+    py5.size(200, 200)
     global vals, norms
-    vals = [0.0] * width   # Array to count how often a random # is picked
-    norms = [0.0] * width  # Normalized version of above
+    vals = [0.0] * py5.width   # Array to count how often a random # is picked
+    norms = [0.0] * py5.width  # Normalized version of above
 
 
 def draw():
-    background(100)
+    py5.background(100)
     # Pick a random number between 0 and 1 based on custom probability function
     n = montecarlo()
     # What spot in the array did we pick
-    index = int(n * width)
-    if index < width:
+    index = int(n * py5.width)
+    if index < py5.width:
         vals[index] += 1
     else:
         print("Error index > width at ", index)
-    stroke(255)
+    py5.stroke(255)
     normalization = False
     maxy = 0.0
     # Draw graph based on values in norms array
     # If a value is greater than the height, set normalization to True
     for x, val in enumerate(vals):
-        line(x, height, x, height - norms[x])
-        if val > height:
+        py5.line(x, py5.height, x, py5.height - norms[x])
+        if val > py5.height:
             normalization = True
         if val > maxy:
             maxy = val
@@ -41,7 +43,7 @@ def draw():
     # Otherwise, just copy the info
     for x, val in enumerate(vals):
         if normalization:
-            norms[x] = (val / maxy) * height
+            norms[x] = (val / maxy) * py5.height
         else:
             norms[x] = val
 
@@ -67,4 +69,4 @@ def montecarlo():
 
 
 if __name__ == "__main__":
-    run()
+    py5.run_sketch()
