@@ -1,18 +1,20 @@
 # The Nature of Code - Daniel Shiffman http://natureofcode.com
 # Example 2-2: Applying a force?
 # PyP5 port by: Yogesh Kulkarni
+# Updated by : Akanksha Suneri
+# Migrated to py5
 # Adopted from processing.py based implementation at:
 # https://github.com/nature-of-code/noc-examples-python/blob/master/chp02_forces/NOC_2_1_forces
 # But followed on screen example
 # Reference Youtube Video: https://www.youtube.com/watch?v=rqecAdEGW6I&list=PLRqwX-V7Uu6aFlwukCmDf0-1-uSR7mklK&index=14
 
-from p5 import *
+import py5
 
 class Mover(object):
     def __init__(self):
-        self.position = Vector(30, 30)
-        self.velocity = Vector(0, 0)
-        self.acceleration = Vector(0, 0)
+        self.position = py5.Py5Vector2D(30, 30)
+        self.velocity = py5.Py5Vector2D(0, 0)
+        self.acceleration = py5.Py5Vector2D(0, 0)
 
     def applyForce(self, force):
         self.acceleration += force
@@ -23,38 +25,38 @@ class Mover(object):
         self.acceleration *= 0
 
     def display(self):
-        stroke(0)
-        strokeWeight(2)
-        fill(127)
-        ellipse(self.position.x, self.position.y, 48, 48)
+        py5.stroke(0)
+        py5.stroke_weight(2)
+        py5.fill(127)
+        py5.ellipse(self.position.x, self.position.y, 48, 48)
 
     def checkEdges(self):
-        if (self.position.x > width):
-            self.position.x = width
+        if (self.position.x > py5.width):
+            self.position.x = py5.width
             self.velocity.x *= -1
         elif (self.position.x < 0):
             self.position.x = 0
             self.velocity.x *= -1
 
-        if (self.position.y > height):
-            self.position.y = height
+        if (self.position.y > py5.height):
+            self.position.y = py5.height
             self.velocity.y *= -1
 
 
 def setup():
-    size(640, 360)
+    py5.size(640, 360)
     global m
     m = Mover()
 
 
 def draw():
-    background(255)
+    py5.background(255)
 
-    gravity = Vector(0, 0.1)
+    gravity = py5.Py5Vector2D(0, 0.1)
     m.applyForce(gravity)
 
-    if mouse_is_pressed:
-        wind = Vector(0.01, 0)
+    if py5.is_mouse_pressed:
+        wind = py5.Py5Vector2D(0.01, 0)
         m.applyForce(wind)
 
     m.update()
@@ -63,4 +65,4 @@ def draw():
 
 
 if __name__ == "__main__":
-    run()
+    py5.run_sketch()
