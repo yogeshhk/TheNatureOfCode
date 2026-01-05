@@ -1,6 +1,8 @@
 # The Nature of Code - Daniel Shiffman http://natureofcode.com
 # Example 1-2: PVector Class
 # PyP5 port by: Yogesh Kulkarni
+# Updated by : Akanksha Suneri
+# Migrated to py5
 # Adopted from processing.py based implementation at:
 # https://github.com/nature-of-code/noc-examples-python/blob/master/chp01_vectors/NOC_1_2_bouncingball_vectors
 # But made Object Oriented as per video.

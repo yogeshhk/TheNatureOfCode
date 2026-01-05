@@ -4,7 +4,7 @@
 # Migrated to https://py5coding.org/index.html
 # Installation Instructions : https://py5coding.org/content/install.html
 # Updated by : Akanksha Suneri
-# Details : Updated file to latest py5 syntax 
+# Migrated to py5
 # A simple py5 sketch to test installation
 
 import py5

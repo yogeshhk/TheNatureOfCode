@@ -4,7 +4,7 @@
 # PyP5 port : Yogesh Kulkarni
 # Reference: https://www.youtube.com/watch?v=6vX8wT1G798&list=PLRqwX-V7Uu6aFlwukCmDf0-1-uSR7mklK
 # Updated by : Akanksha Suneri
-# Migrated to py5 https://py5coding.org/index.html
+# Migrated to py5
 
 import py5
 
