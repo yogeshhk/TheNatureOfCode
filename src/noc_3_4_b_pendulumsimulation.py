@@ -5,6 +5,7 @@
 # https://github.com/nature-of-code/noc-examples-python/blob/master/chp03_oscillation/NOC_3_10_PendulumExample
 # But followed on screen example
 # Reference Youtube Video: https://www.youtube.com/watch?v=rqecAdEGW6I&list=PLRqwX-V7Uu6aFlwukCmDf0-1-uSR7mklK&index=22
+# Migrated to py5
 
 # Pendulum
 #
@@ -25,7 +26,7 @@
 # For a more substantial explanation, visit:
 # http://www.myphysicslab.com/pendulum1.html
 
-from p5 import *
+import py5
 
 
 class Pendulum(object):
@@ -35,134 +36,82 @@ class Pendulum(object):
     """
 
     def __init__(self, origin, r):
-        """
-        This constructor could be improved to allow a greater variety of
-        pendulums
-        """
-
-        # position of pendulum ball
-        self.position = Vector(0,0)
-
-        # position of arm origin
-        self.origin = origin.copy()
-
-        # Length of arm
+        self.position = py5.Py5Vector(0, 0)
+        self.origin = py5.Py5Vector(origin.x, origin.y)
         self.r = r
-
-        # Pendulum arm angle
-        self.angle = PI / 4
-
-        # Angle velocity
+        self.angle = py5.PI / 4
         self.aVelocity = 0.0
-
-        # Angle acceleration
         self.aAcceleration = 0.0
-
-        # Arbitrary ball radius
         self.ballr = 48
-
-        # Arbitary damping amount
         self.damping = 0.995
-
         self.dragging = False
 
     def go(self):
         self.update()
-        self.drag()  # for user interaction
+        self.drag()
         self.display()
 
     def update(self):
-        """
-        Function to update position
-        """
-        # As long as we aren't dragging the pendulum, let it swing!
         if not self.dragging:
-            # Arbitrary constant
             gravity = 0.4
-
-            # Calculate acceleration
-            # (see: http://www.myphysicslab.com/pendulum1.html)
-            self.aAcceleration = (-1 * gravity / self.r) * sin(self.angle)
-
-            # Increment velocity
+            # Angular acceleration from pendulum physics: a = -(g/r) * sin(theta)
+            self.aAcceleration = (-1 * gravity / self.r) * py5.sin(self.angle)
             self.aVelocity += self.aAcceleration
-
-            # Arbitrary damping
             self.aVelocity *= self.damping
-
-            # Increment angle
             self.angle += self.aVelocity
 
     def display(self):
-        # Polar to cartesian conversion
-        self.position = Vector(self.r * sin(self.angle), self.r * cos(self.angle), 0)
-
-        #  Make sure the position is relative to the pendulum's origin
+        # Convert polar angle to Cartesian bob position
+        self.position = py5.Py5Vector(
+            self.r * py5.sin(self.angle),
+            self.r * py5.cos(self.angle)
+        )
         self.position += self.origin
 
-        stroke(0)
-        strokeWeight(2)
-
-        # Draw the arm
-        line(self.origin.x, self.origin.y, self.position.x, self.position.y)
-        ellipseMode(CENTER)
-        fill(175)
-
+        py5.stroke(0)
+        py5.stroke_weight(2)
+        py5.line(self.origin.x, self.origin.y, self.position.x, self.position.y)
+        py5.ellipse_mode(py5.CENTER)
+        py5.fill(175)
         if self.dragging:
-            fill(0)
-
-        # Draw the ball
-        ellipse(self.position.x, self.position.y, self.ballr, self.ballr)
-
-    # The methods below are for mouse interaction
+            py5.fill(0)
+        py5.ellipse(self.position.x, self.position.y, self.ballr, self.ballr)
 
     def clicked(self, mx, my):
-        """
-        This checks to see if we clicked on the pendulum ball
-        """
-        m = Point(mx,my)
-        pos = Point(self.position.x,self.position.y)
-        d = distance(m, pos)
+        d = py5.dist(mx, my, self.position.x, self.position.y)
         if d < self.ballr:
             self.dragging = True
 
     def stopDragging(self):
-        """
-        This tells us we are not longer clicking on the ball.
-        """
-        # No velocity once you let go
         self.aVelocity = 0
         self.dragging = False
 
     def drag(self):
-        # If we are draging the ball, we calculate the angle between the
-        # pendulum origin and mouse position we assign that angle to the
-        # pendulum
         if self.dragging:
-            # Difference between 2 points
-            diff = self.origin - Vector(mouse_x, mouse_y)
-            # Angle relative to vertical axis
-            angle = atan2(-1 * diff.y, diff.x) - radians(90)
+            diff = self.origin - py5.Py5Vector(py5.mouse_x, py5.mouse_y)
+            # atan2 gives angle from positive x-axis; subtract 90° to get angle from vertical
+            angle = py5.atan2(-1 * diff.y, diff.x) - py5.radians(90)
+            # Fixed: was computing angle but never assigning it to self.angle
+            self.angle = angle
+
 
 def setup():
-    size(640, 360)
-
-    # Make a new Pendulum with an origin position and armlength
+    py5.size(640, 360)
     global p
-    p = Pendulum(Vector(width / 2, 0), 175)
+    p = Pendulum(py5.Py5Vector(py5.width / 2, 0), 175)
 
 
 def draw():
-    background(255)
+    py5.background(255)
     p.go()
 
 
-def mousePressed():
-    p.clicked(mouse_x, mouse_y)
+def mouse_pressed():
+    p.clicked(py5.mouse_x, py5.mouse_y)
 
 
-def mouseReleased():
+def mouse_released():
     p.stopDragging()
 
 if __name__ == "__main__":
-    run()
+    py5.run_sketch()

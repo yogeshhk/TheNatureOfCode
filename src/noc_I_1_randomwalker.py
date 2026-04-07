@@ -23,7 +23,7 @@ class Walker(object):
 
     # Randomly move up, down, left, right, or stay in one place
     def step(self):
-        choice = int(random.randint(0,3))
+        choice = random.randint(0, 3)
 
         if choice == 0:
             self.x += 1

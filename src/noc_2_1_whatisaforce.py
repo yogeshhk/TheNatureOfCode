@@ -8,6 +8,9 @@
 
 import py5
 
+# Intentional placeholder — this video segment explains what a force is
+# conceptually (Newton's laws) with no runnable code. See the YouTube video.
+
 def setup():
     pass
 

@@ -5,52 +5,53 @@
 # https://github.com/nature-of-code/noc-examples-python/blob/master/chp01_vectors/NOC_1_7_motion101
 # But followed on screen example
 # Reference Youtube Video: https://www.youtube.com/watch?v=rqecAdEGW6I&list=PLRqwX-V7Uu6aFlwukCmDf0-1-uSR7mklK&index=11
+# Migrated to py5
 
-from p5 import *
-import random
+import py5
 
 class Mover(object):
 
     def __init__(self):
-        self.location = Vector(width/2,height/2) #Vector(random.uniform(0,width), random.uniform(0,height))
-        self.velocity = Vector(0,0) #Vector(random.uniform(-2, 2), random.uniform(-2, 2))
-        self.acceleration = Vector(0,0)
+        self.location = py5.Py5Vector(py5.width / 2, py5.height / 2)
+        self.velocity = py5.Py5Vector(0, 0)
+        self.acceleration = py5.Py5Vector(0, 0)
 
     def update(self):
-        self.acceleration = Vector.random_2D()
+        self.acceleration = py5.Py5Vector.random_2D()
         self.velocity += self.acceleration
         self.location += self.velocity
-        self.velocity.limit(5)
+        # Limit speed to 5 (py5 Py5Vector has no built-in limit(), so cap manually)
+        if self.velocity.mag > 5:
+            self.velocity.set_mag(5)
 
     def display(self):
-        stroke(0)
-        strokeWeight(2)
-        fill(127)
-        ellipse(self.location.x, self.location.y, 48, 48)
+        py5.stroke(0)
+        py5.stroke_weight(2)
+        py5.fill(127)
+        py5.ellipse(self.location.x, self.location.y, 48, 48)
 
     def checkEdges(self):
-        if self.location.x > width:
+        if self.location.x > py5.width:
             self.location.x = 0
         elif self.location.x < 0:
-            self.location.x = width
+            self.location.x = py5.width
 
-        if self.location.y > height:
+        if self.location.y > py5.height:
             self.location.y = 0
         elif self.location.y < 0:
-            self.location.y = height
+            self.location.y = py5.height
 
 def setup():
-    size(640, 360)
+    py5.size(640, 360)
     global mover
     mover = Mover()
 
 
 def draw():
-    background(255)
-
+    py5.background(255)
     mover.update()
     mover.checkEdges()
     mover.display()
 
 if __name__ == "__main__":
-    run()
+    py5.run_sketch()

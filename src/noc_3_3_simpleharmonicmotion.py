@@ -5,32 +5,30 @@
 # https://github.com/nature-of-code/noc-examples-python/blob/master/chp03_oscillation/NOC_3_05_simple_harmonic_motion
 # But followed on screen example
 # Reference Youtube Video: https://www.youtube.com/watch?v=rqecAdEGW6I&list=PLRqwX-V7Uu6aFlwukCmDf0-1-uSR7mklK&index=21
+# Migrated to py5
 
-from p5 import *
+import py5
 
 
 def setup():
-    size(640, 360)
+    py5.size(640, 360)
 
 
 def draw():
-    background(255)
+    py5.background(255)
 
-    period = 120 # number of frames needed for a full cycle
-    amplitude = 300 # traversal distance
+    period = 120    # number of frames for one full oscillation cycle
+    amplitude = 300 # max displacement from center
 
-    # Calculating horizontal position according to formula
-    # for simple harmonic motion
-    x = amplitude * sin(TWO_PI * frame_count / period)
-    # x = amplitude * sin(angle), where angle += 0.2 will work also. [Note: angle is in radians]
+    # x = A * sin(2π * t / T) — standard SHM formula using frame count as time
+    x = amplitude * py5.sin(py5.TWO_PI * py5.frame_count / period)
 
-    stroke(0)
-    strokeWeight(2)
-    fill(127)
-    translate(width / 2, height / 2)
-    line(0, 0, x, 0)
-    ellipse(x, 0, 48, 48)
-
+    py5.stroke(0)
+    py5.stroke_weight(2)
+    py5.fill(127)
+    py5.translate(py5.width / 2, py5.height / 2)
+    py5.line(0, 0, x, 0)
+    py5.ellipse(x, 0, 48, 48)
 
 if __name__ == "__main__":
-    run()
+    py5.run_sketch()

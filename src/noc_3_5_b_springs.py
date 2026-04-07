@@ -5,8 +5,9 @@
 # https://github.com/nature-of-code/noc-examples-python/blob/master/chp03_oscillation/NOC_3_11_spring
 # But followed on screen example
 # Reference Youtube Video: https://www.youtube.com/watch?v=rqecAdEGW6I&list=PLRqwX-V7Uu6aFlwukCmDf0-1-uSR7mklK&index=22
+# Migrated to py5
 
-from p5 import *
+import py5
 
 
 class Bob(object):
@@ -16,23 +17,21 @@ class Bob(object):
     """
 
     def __init__(self, x, y):
-        self.position = Vector(x, y)
-        self.velocity = Vector(0,0)
-        self.acceleration = Vector(0,0)
+        self.position = py5.Py5Vector(x, y)
+        self.velocity = py5.Py5Vector(0, 0)
+        self.acceleration = py5.Py5Vector(0, 0)
 
         self.mass = 24
 
-        # Arbitrary self.damping to simulate friction / drag
+        # Arbitrary damping to simulate friction / drag
         self.damping = 0.98
 
         # For mouse interaction
-        self.dragOffset = Vector(0,0)
+        self.dragOffset = py5.Py5Vector(0, 0)
         self.dragging = False
 
     def update(self):
-        """
-        Standard Euler integration
-        """
+        """Standard Euler integration"""
         self.velocity += self.acceleration
         self.velocity *= self.damping
         self.position += self.velocity
@@ -40,24 +39,22 @@ class Bob(object):
 
     def applyForce(self, force):
         # Newton's law: F = M * A
-        f = force.copy()
+        f = py5.Py5Vector(force.x, force.y)
         f /= self.mass
         self.acceleration += f
 
     def display(self):
         """Draw the bob"""
-        stroke(0)
-        strokeWeight(2)
-        fill(175)
-        if (self.dragging):
-            fill(50)
-        ellipse(self.position.x, self.position.y, self.mass * 2, self.mass * 2)
-
-    # The methods below are for mouse interaction
+        py5.stroke(0)
+        py5.stroke_weight(2)
+        py5.fill(175)
+        if self.dragging:
+            py5.fill(50)
+        py5.ellipse(self.position.x, self.position.y, self.mass * 2, self.mass * 2)
 
     def clicked(self, mx, my):
-        """This checks to see if we clicked on the mover"""
-        d = dist(Vector(mx, my), self.position)
+        """Check if we clicked on the bob"""
+        d = py5.dist(mx, my, self.position.x, self.position.y)
         if d < self.mass:
             self.dragging = True
             self.dragOffset.x = self.position.x - mx
@@ -74,125 +71,86 @@ class Bob(object):
 
 class Spring(object):
     """
-    Class to describe an anchor point that can connect to "Bob" objects via
-    a spring.
+    Class to describe an anchor point that can connect to Bob objects via a spring.
     Thank you: http://www.myphysicslab.com/spring2d.html
     """
 
     def __init__(self, x, y, l):
-        # position
-        self.anchor = Vector(x, y)
-
-        # Rest length and spring constant
-        self.length = l
-        self.k = 0.2
+        self.anchor = py5.Py5Vector(x, y)
+        self.length = l  # rest length
+        self.k = 0.2     # spring constant
 
     def connect(self, b):
-        """Calculate spring force"""
-
-        # Vector pointing from anchor to bob position
+        """Apply Hooke's Law spring force to bob: F = -k * stretch"""
         force = b.position - self.anchor
-
-        # What is distance
-        d = force.magnitude
-
-        # Stretch is difference between current distance and rest length
+        d = force.mag
         stretch = d - self.length
-
-        # Calculate force according to Hooke's Law
-        # F = k * stretch
         force.normalize()
         force *= -1 * self.k * stretch
         b.applyForce(force)
 
     def constrainLength(self, b, minlen, maxlen):
-        """
-        Constrain the distance between bob and anchor between min and max
-        """
-
+        """Constrain the distance between bob and anchor between min and max"""
         direction = b.position - self.anchor
-        d = direction.magnitude
+        d = direction.mag
 
-        # Is it too short?
         if d < minlen:
             direction.normalize()
             direction *= minlen
-
-            # Reset position and stop from moving (not realistic physics)
             b.position = self.anchor + direction
             b.velocity *= 0
-
-        # Is it too long?
         elif d > maxlen:
             direction.normalize()
             direction *= maxlen
-
-            # Reset position and stop from moving (not realistic physics)
             b.position = self.anchor + direction
             b.velocity *= 0
 
     def display(self):
-        stroke(0)
-        fill(175)
-        strokeWeight(2)
-        rectMode(CENTER)
-        rect(self.anchor.x, self.anchor.y, 10, 10)
+        py5.stroke(0)
+        py5.fill(175)
+        py5.stroke_weight(2)
+        py5.rect_mode(py5.CENTER)
+        py5.rect(self.anchor.x, self.anchor.y, 10, 10)
 
     def displayLine(self, b):
-        strokeWeight(2)
-        stroke(0)
-        line(b.position.x, b.position.y, self.anchor.x, self.anchor.y)
+        py5.stroke_weight(2)
+        py5.stroke(0)
+        py5.line(b.position.x, b.position.y, self.anchor.x, self.anchor.y)
 
 
 def setup():
-    size(640, 360)
-
-    # Create objects at starting position
-    # Note third argument in Spring constructor is "rest length"
+    py5.size(640, 360)
     global bob, spring
-    spring = Spring(width / 2, 10, 100)
-    bob = Bob(width / 2, 100)
+    spring = Spring(py5.width / 2, 10, 100)
+    bob = Bob(py5.width / 2, 100)
 
 
 def draw():
-    background(255)
-    global bob, spring
+    py5.background(255)
 
-    # Apply a gravity force to the bob
-    gravity = Vector(0, 2)
+    gravity = py5.Py5Vector(0, 2)
     bob.applyForce(gravity)
 
-    # Connect the bob to the spring (this calculates the force)
     spring.connect(bob)
-
-    # Constrain spring distance between min and max
     spring.constrainLength(bob, 30, 200)
 
-    # Update bob
     bob.update()
-    # If it's being dragged
-    bob.drag(mouse_x, mouse_y)
+    bob.drag(py5.mouse_x, py5.mouse_y)
 
-    # Draw a line between spring and bob
     spring.displayLine(bob)
-
-    # Draw everything else
     bob.display()
     spring.display()
 
-    fill(0)
-    text("click on bob to drag", 10, height - 5)
+    py5.fill(0)
+    py5.text("click on bob to drag", 10, py5.height - 5)
 
 
-# For mouse interaction with bob
-def mousePressed():
-    global bob
-    bob.clicked(mouse_x, mouse_y)
+def mouse_pressed():
+    bob.clicked(py5.mouse_x, py5.mouse_y)
 
 
-def mouseReleased():
-    global bob
+def mouse_released():
     bob.stopDragging()
 
 if __name__ == "__main__":
-    run()
+    py5.run_sketch()

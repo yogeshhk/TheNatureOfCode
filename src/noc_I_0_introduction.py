@@ -8,6 +8,9 @@
 
 import py5
 
+# Intentional placeholder — this video segment introduces the chapter concept
+# verbally with no runnable code. See the YouTube video for the explanation.
+
 def setup():
     pass
 

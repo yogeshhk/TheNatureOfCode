@@ -5,8 +5,9 @@
 # https://github.com/nature-of-code/noc-examples-python/blob/master/chp03_oscillation/NOC_3_04_PolarToCartesian
 # But followed on screen example
 # Reference Youtube Video: https://www.youtube.com/watch?v=rqecAdEGW6I&list=PLRqwX-V7Uu6aFlwukCmDf0-1-uSR7mklK&index=20
+# Migrated to py5
 
-from p5 import *
+import py5
 
 
 # PolarToCartesian
@@ -16,38 +17,33 @@ from p5 import *
 
 
 def setup():
-    size(640, 360)
-    # Initialize all values
-    global r, theta, angularVeclocity, angularAcceleration
-    r = height * 0.45
+    py5.size(640, 360)
+    global r, theta, angularVelocity, angularAcceleration
+    r = py5.height * 0.45
     theta = 0
-    angularVeclocity = 0.0
+    angularVelocity = 0.0
     angularAcceleration = 0.01
 
 
 def draw():
-    background(255)
-    global r, theta, angularVeclocity, angularAcceleration
+    py5.background(255)
+    global r, theta, angularVelocity, angularAcceleration
 
-    # Translate the origin point to the center of the screen
-    translate(width / 2, height / 2)
+    py5.translate(py5.width / 2, py5.height / 2)
 
-    # Convert polar to cartesian
-    x = r * cos(theta)
-    y = r * sin(theta)
+    x = r * py5.cos(theta)
+    y = r * py5.sin(theta)
 
-    # Draw the ellipse at the cartesian coordinate
-    ellipseMode(CENTER)
-    fill(127)
-    stroke(0)
-    strokeWeight(2)
-    line(0, 0, x, y)
-    ellipse(x, y, 48, 48)
+    py5.ellipse_mode(py5.CENTER)
+    py5.fill(127)
+    py5.stroke(0)
+    py5.stroke_weight(2)
+    py5.line(0, 0, x, y)
+    py5.ellipse(x, y, 48, 48)
 
-    # Increase the angle over time
-    theta += angularVeclocity
-    angularVeclocity += angularAcceleration
-    angularVeclocity = constrain(angularVeclocity,0,0.1)
+    theta += angularVelocity
+    angularVelocity += angularAcceleration
+    angularVelocity = py5.constrain(angularVelocity, 0, 0.1)
 
 if __name__ == "__main__":
-    run()
+    py5.run_sketch()

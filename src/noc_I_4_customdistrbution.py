@@ -51,7 +51,7 @@ def draw():
 def montecarlo():
     """
     An algorithm for picking a random number based on monte carlo method
-    Here probability is determined by formula y = x
+    Here probability is determined by formula y = x*x (quadratic bias toward 1)
     """
     # let's count just so we don't get stuck in an infinite loop by accident
     hack = 0
