@@ -1,11 +1,12 @@
 # Setup and Running Guide
 
-This repository requires a specific Python environment setup to run the `p5` based examples, as `p5` has strict dependency requirements (specifically with `Pillow`).
+This repository's examples run on `py5` (https://py5coding.org/), which wraps
+Processing and requires a Java Virtual Machine in addition to Python.
 
 ## Prerequisites
 
 - Python 3.10 or newer (tested with Python 3.13)
-
+- Java 17 or newer (a non-headless JDK; Java 21+ preferred)
 
 ## Installation Instructions
 
@@ -27,19 +28,17 @@ It is highly recommended to use a virtual environment.
     .venv\Scripts\Activate.ps1
     ```
 
-3.  **Install Dependencies**:
-
-    Due to compatibility issues with `p5` and recent versions of `Pillow` on Python 3.13+, you must install the dependencies in a specific order:
+3.  **Install py5**:
 
     ```powershell
-    # 1. Install specific Pillow version first
-    pip install Pillow==11.0.0
+    pip install py5
+    ```
 
-    # 2. Install p5 without its dependencies (to avoid conflicts)
-    pip install p5 --no-deps
-
-    # 3. Install remaining dependencies manually
-    pip install requests numpy glfw vispy triangle PyOpenGL
+    If pip reports an error related to the `line-profiler` package (a known issue
+    on Windows and macOS), install it via conda first, then retry:
+    ```powershell
+    conda install -c conda-forge line_profiler
+    pip install py5
     ```
 
 ## Running the Examples
@@ -52,4 +51,11 @@ Once the environment is set up, you can run the examples directly using python.
 python src/noc_1_1_vectors.py
 ```
 
-If you encounter `ModuleNotFoundError: No module named 'p5'`, ensure your virtual environment is active.
+If you encounter `ModuleNotFoundError: No module named 'py5'`, ensure your virtual environment is active.
+
+Quick sanity check without opening any windows (useful to confirm the codebase
+compiles before running individual sketches, which open a GUI):
+
+```powershell
+python -m py_compile src/*.py
+```

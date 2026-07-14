@@ -1,0 +1,50 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#5eead4"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- oscillation motif -->
+  <path d="M -20 460 C 100 380, 220 540, 340 460 C 460 380, 580 540, 700 460 C 820 380, 940 540, 1060 460 C 1140 410, 1180 460, 1220 460"
+        fill="none" stroke="#38bdf8" stroke-width="2.5" opacity="0.35"/>
+
+  <!-- particle / randomness motif -->
+  <g fill="#f59e0b">
+    <circle cx="120" cy="120" r="3" opacity="0.6"/>
+    <circle cx="180" cy="90" r="2" opacity="0.4"/>
+    <circle cx="90" cy="180" r="4" opacity="0.5"/>
+    <circle cx="230" cy="160" r="2.5" opacity="0.5"/>
+    <circle cx="1020" cy="130" r="3" opacity="0.5"/>
+    <circle cx="1080" cy="90" r="2" opacity="0.4"/>
+    <circle cx="960" cy="170" r="4" opacity="0.4"/>
+    <circle cx="1110" cy="190" r="2.5" opacity="0.5"/>
+    <circle cx="150" cy="520" r="2" opacity="0.3"/>
+    <circle cx="1050" cy="540" r="2.5" opacity="0.3"/>
+    <circle cx="600" cy="80" r="2.5" opacity="0.4"/>
+    <circle cx="650" cy="130" r="2" opacity="0.3"/>
+  </g>
+
+  <!-- vector motif -->
+  <g stroke="#5eead4" stroke-width="2.5" opacity="0.55" marker-end="url(#arrowhead)">
+    <line x1="80" y1="330" x2="200" y2="270"/>
+    <line x1="1000" y1="340" x2="1120" y2="290"/>
+    <line x1="60" y1="260" x2="140" y2="200"/>
+  </g>
+
+  <!-- title -->
+  <text x="600" y="270" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"
+        font-size="56" font-weight="700" fill="#f8fafc">The Nature of Code</text>
+  <text x="600" y="320" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"
+        font-size="26" font-weight="400" fill="#94a3b8">Python examples, built with py5</text>
+
+  <!-- tag line -->
+  <text x="600" y="378" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"
+        font-size="18" font-weight="400" fill="#5eead4" letter-spacing="1">VECTORS  ·  FORCES  ·  OSCILLATION  ·  PARTICLE SYSTEMS</text>
+</svg>

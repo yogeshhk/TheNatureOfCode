@@ -12,9 +12,9 @@ import py5
 
 class Mover(object):
     def __init__(self):
-        self.position = py5.Py5Vector2D(30, 30)
-        self.velocity = py5.Py5Vector2D(0, 0)
-        self.acceleration = py5.Py5Vector2D(0, 0)
+        self.position = py5.Py5Vector(30, 30)
+        self.velocity = py5.Py5Vector(0, 0)
+        self.acceleration = py5.Py5Vector(0, 0)
 
     def applyForce(self, force):
         self.acceleration += force
@@ -52,11 +52,11 @@ def setup():
 def draw():
     py5.background(255)
 
-    gravity = py5.Py5Vector2D(0, 0.1)
+    gravity = py5.Py5Vector(0, 0.1)
     m.applyForce(gravity)
 
     if py5.is_mouse_pressed:
-        wind = py5.Py5Vector2D(0.01, 0)
+        wind = py5.Py5Vector(0.01, 0)
         m.applyForce(wind)
 
     m.update()

@@ -26,8 +26,7 @@ class Mover(object):
         self.velocity += self.acceleration
         self.location += self.velocity
         # Limit speed to 5
-        if self.velocity.mag > 5:
-            self.velocity.set_mag(5)
+        self.velocity.set_limit(5)
 
     def display(self):
         py5.stroke(0)

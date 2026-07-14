@@ -1,4 +1,4 @@
-# src — Nature of Code Examples
+# src: Nature of Code Examples
 
 Each `.py` file here is a **standalone py5 sketch**. Run any one directly:
 
@@ -12,12 +12,12 @@ python src/<filename>.py
 noc_<chapter>_<example>_<description>.py
 ```
 
-- `noc_I_*`  — Introduction chapter (randomness, noise)
-- `noc_1_*`  — Chapter 1: Vectors
-- `noc_2_*`  — Chapter 2: Forces
-- `noc_3_*`  — Chapter 3: Oscillation
+- `noc_I_*`: Introduction chapter (randomness, noise)
+- `noc_1_*`: Chapter 1: Vectors
+- `noc_2_*`: Chapter 2: Forces
+- `noc_3_*`: Chapter 3: Oscillation
 
-Letter suffixes (`_a`, `_b`) indicate variant implementations of the same concept —
+Letter suffixes (`_a`, `_b`) indicate variant implementations of the same concept,
 typically procedural (`_a`) followed by object-oriented (`_b`).
 
 ## Sketch Structure
@@ -43,7 +43,7 @@ if __name__ == "__main__":
 
 ## Placeholder Files
 
-`noc_I_0_introduction.py` and `noc_2_1_whatisaforce.py` are intentionally empty —
+`noc_I_0_introduction.py` and `noc_2_1_whatisaforce.py` are intentionally empty:
 the corresponding video segments introduce concepts verbally with no runnable code.
 
 ## Adding a New Example

@@ -15,9 +15,9 @@ num_movers = 5
 
 class Mover(object):
     def __init__(self, m, x, y):
-        self.position = py5.Py5Vector2D(x, y)
-        self.velocity = py5.Py5Vector2D(0, 0)
-        self.acceleration = py5.Py5Vector2D(0, 0)
+        self.position = py5.Py5Vector(x, y)
+        self.velocity = py5.Py5Vector(0, 0)
+        self.acceleration = py5.Py5Vector(0, 0)
         self.mass = m
 
     def applyForce(self, force):
@@ -57,12 +57,12 @@ def draw():
     py5.background(255)
 
     for m in movers:
-        gravity = py5.Py5Vector2D(0, 0.1)
+        gravity = py5.Py5Vector(0, 0.1)
         gravity *= m.mass # next, internally it will get divided, so as to keep gravitational acceleration constant
         m.applyForce(gravity)
 
         if py5.is_mouse_pressed:
-            wind = py5.Py5Vector2D(0.01, 0)
+            wind = py5.Py5Vector(0.01, 0)
             m.applyForce(wind)
 
         m.update()

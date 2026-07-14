@@ -17,12 +17,11 @@ class Mover(object):
         self.acceleration = py5.Py5Vector(0, 0)
 
     def update(self):
-        self.acceleration = py5.Py5Vector.random_2D()
+        self.acceleration = py5.Py5Vector.random(dim=2)
         self.velocity += self.acceleration
         self.location += self.velocity
-        # Limit speed to 5 (py5 Py5Vector has no built-in limit(), so cap manually)
-        if self.velocity.mag > 5:
-            self.velocity.set_mag(5)
+        # Limit speed to 5
+        self.velocity.set_limit(5)
 
     def display(self):
         py5.stroke(0)

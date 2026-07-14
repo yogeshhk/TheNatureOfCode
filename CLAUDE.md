@@ -8,16 +8,18 @@ Python implementations of [The Nature of Code](http://natureofcode.com/) by Dani
 
 ## Environment Setup
 
-Requires Python 3.10+ and a virtual environment. Install dependencies in this specific order due to Pillow/py5 compatibility:
+Requires Python 3.10+, Java 17+ (non-headless JVM), and a virtual environment:
 
 ```bash
 python -m venv .venv
 .venv\Scripts\Activate.ps1          # Windows PowerShell
 
-pip install Pillow==11.0.0
-pip install p5 --no-deps
-pip install requests numpy glfw vispy triangle PyOpenGL
+pip install py5
 ```
+
+If pip reports an error related to the `line-profiler` package on Windows, install
+it via conda first (`conda install -c conda-forge line_profiler`), then retry
+`pip install py5`.
 
 ## Running Examples
 
@@ -27,7 +29,7 @@ Each script is self-contained and run directly:
 python src/noc_1_2_pvectorclass.py
 ```
 
-All scripts follow the same py5 sketch pattern — `setup()`, `draw()`, and `py5.run_sketch()` at module level.
+All scripts follow the same py5 sketch pattern: `setup()`, `draw()`, and `py5.run_sketch()` at module level.
 
 ## Code Architecture
 
@@ -54,7 +56,7 @@ if __name__ == "__main__":
 - Use `py5.Py5Vector` (not `p5.Vector`) for 2D/3D vectors
 - Global sketch state (width, height, mouse_x, mouse_y, frame_count) is accessed via `py5.*`
 - `push_matrix()`/`pop_matrix()` for transform stacks; `translate()`, `rotate()` for transforms
-- PyCharm may flag `width`, `height` etc. as undefined — they are valid py5 globals
+- PyCharm may flag `width`, `height` etc. as undefined; they are valid py5 globals
 
 **File naming convention:** `noc_<chapter>_<example>_<description>.py`  
 - `noc_I_*` = Introduction chapter (randomness, noise)  

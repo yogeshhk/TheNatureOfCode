@@ -1,0 +1,52 @@
+<svg width="1200" height="1200" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgsq" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arrowhead2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#5eead4"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="1200" fill="url(#bgsq)"/>
+
+  <!-- oscillation motif, two bands -->
+  <path d="M -20 420 C 100 340, 220 500, 340 420 C 460 340, 580 500, 700 420 C 820 340, 940 500, 1060 420 C 1140 380, 1180 420, 1220 420"
+        fill="none" stroke="#38bdf8" stroke-width="3" opacity="0.3"/>
+  <path d="M -20 860 C 100 780, 220 940, 340 860 C 460 780, 580 940, 700 860 C 820 780, 940 940, 1060 860 C 1140 820, 1180 860, 1220 860"
+        fill="none" stroke="#38bdf8" stroke-width="3" opacity="0.22"/>
+
+  <!-- particle / randomness motif -->
+  <g fill="#f59e0b">
+    <circle cx="150" cy="150" r="4" opacity="0.55"/>
+    <circle cx="230" cy="110" r="2.5" opacity="0.4"/>
+    <circle cx="110" cy="230" r="3.5" opacity="0.45"/>
+    <circle cx="1050" cy="150" r="4" opacity="0.5"/>
+    <circle cx="970" cy="110" r="2.5" opacity="0.4"/>
+    <circle cx="1090" cy="230" r="3.5" opacity="0.45"/>
+    <circle cx="150" cy="1050" r="4" opacity="0.4"/>
+    <circle cx="1050" cy="1050" r="4" opacity="0.4"/>
+    <circle cx="600" cy="120" r="3" opacity="0.35"/>
+    <circle cx="600" cy="1080" r="3" opacity="0.35"/>
+  </g>
+
+  <!-- vector motif -->
+  <g stroke="#5eead4" stroke-width="3" opacity="0.55" marker-end="url(#arrowhead2)">
+    <line x1="120" y1="620" x2="260" y2="550"/>
+    <line x1="1080" y1="640" x2="940" y2="570"/>
+    <line x1="130" y1="720" x2="230" y2="670"/>
+  </g>
+
+  <!-- title -->
+  <text x="600" y="570" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"
+        font-size="66" font-weight="700" fill="#f8fafc">The Nature</text>
+  <text x="600" y="645" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"
+        font-size="66" font-weight="700" fill="#f8fafc">of Code</text>
+  <text x="600" y="705" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"
+        font-size="28" font-weight="400" fill="#94a3b8">Python examples, built with py5</text>
+
+  <!-- tag line -->
+  <text x="600" y="770" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"
+        font-size="20" font-weight="400" fill="#5eead4" letter-spacing="1">VECTORS · FORCES · OSCILLATION</text>
+</svg>
